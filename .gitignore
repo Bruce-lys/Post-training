@@ -67,3 +67,6 @@ id_ed25519*
 
 # ===== 嵌套的 mcore-bridge 上游 checkout（改动以 patch 形式留档）=====
 multinode/overlays/mcore-bridge-9d610ffb
+
+# 采样任务运行时持续改写的进度文件，属运行状态而非代码
+zhh-tb4/resample/PROGRESS.json
