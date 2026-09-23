@@ -1,0 +1,44 @@
+From 8417fcf510ada1b88b1052aaa2581638f628fe3a Mon Sep 17 00:00:00 2001
+From: lys <aiden.ma0309@gmail.com>
+Date: Fri, 18 Sep 2026 17:03:05 +0800
+Subject: [PATCH 2/2] QSA: build selection block bitmap in row chunks
+ (bit-exact, -12 GiB transient at 205k tokens)
+
+selection_to_block_bitmap materialised int64 [T, K] row/block/mask temporaries plus two
+advanced-indexing copies (~13 GiB at T=205k, K=2051) before writing the [T, NB] uint8 flags.
+Build the flags 8192 rows at a time instead. Output is bit-identical (verified on random
+inputs with pads on CPU and GPU); GPU peak transient 22.1 -> 10.2 GiB, 2x faster.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ .../model/modules/kernels/qsa_block_sparse_attn.py | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py b/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
+index f7d23a0..a270966 100644
+--- a/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
++++ b/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
+@@ -374,10 +374,16 @@ def selection_to_block_bitmap(indices: Tensor, num_tokens: int, block_size: int)
+     """
+     num_blocks = -(-num_tokens // block_size)
+     flags = torch.zeros(indices.shape[0], num_blocks, dtype=torch.uint8, device=indices.device)
+-    valid = indices >= 0
+-    rows = torch.arange(indices.shape[0], device=indices.device).unsqueeze(1).expand_as(indices)
+-    blocks = torch.where(valid, indices // block_size, torch.zeros_like(indices))
+-    flags[rows[valid], blocks[valid].long()] = 1
++    # Build the flags chunk_rows rows at a time: the int64 [T, K] temporaries (row ids, block ids, mask,
++    # two advanced-indexing copies) were ~13 GiB at T=205k, K=2051 and set the stage-0 peak
++    # (memory snapshot 2026-09-18). Output is bit-identical to the single-shot version.
++    chunk_rows = 8192
++    for start in range(0, indices.shape[0], chunk_rows):
++        idx = indices[start:start + chunk_rows]
++        valid = idx >= 0
++        rows = torch.arange(idx.shape[0], device=idx.device).unsqueeze(1).expand_as(idx)[valid]
++        cols = (idx[valid] // block_size).long()
++        flags[start:start + chunk_rows][rows, cols] = 1
+     return flags
+ 
+ 
+-- 
+2.34.1
+

@@ -1,0 +1,118 @@
+# Qwen3.8-Flash-Next LoRA SFT | terminal-bench 226 traj turn-split v3 (fit 207K) | 4 nodes x 8 H200 = 32 GPUs
+# 并行：TP8(机内 NVLink) x PP2(两机一段) x DP2 = 32；EP16 x ETP1 = TP x CP x DP = 16
+# QSA：packing/padding_free(thd) 下 TE 无法叠自定义 mask，稀疏选择会退化成稠密全注意力；必须 packing:false + padding_free:false
+# 基线：hj 在单机 TP4/PP2/EP4 @128K 跑通 5389 步的配方（flash attn + USE_MCORE_GDN + 优化器全量 CPU offload）；本配方关 packing 以保留 QSA
+# 启动：每台机 bash multinode/launch_node.sh  （NODE_RANK 由主机名在 NODES 列表中的位置推导，见脚本）
+
+ENV:
+  NPROC_PER_NODE: 8
+  CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
+  CUDA_DEVICE_MAX_CONNECTIONS: 1
+  PYTHONUNBUFFERED: 1
+  PYTORCH_ALLOC_CONF: expandable_segments:True,garbage_collection_threshold:0.8   # 及时回收缓存块，减少碎片导致的假 OOM
+  TORCHDYNAMO_DISABLE: 1
+  TORCH_COMPILE_DISABLE: 1
+  USE_MCORE_GDN: "True"
+  PLE_CHUNK_SIZE: 16384
+  MODELSCOPE_CACHE: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/modelscope
+  HF_HOME: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/huggingface
+  # 多机通信：8 张 400G IB 走 NCCL；rendezvous/gloo 走 IPoIB 口（主机名解析到 192.168.1.x）
+  NCCL_IB_HCA: ib7s400
+  NCCL_SOCKET_IFNAME: ib6s200p0
+  GLOO_SOCKET_IFNAME: ib6s200p0
+  NCCL_DEBUG: WARN
+  TORCH_NCCL_ASYNC_ERROR_HANDLING: 1
+
+model: /kwkj-k8s/llm_team/models/Qwen3.8-Flash-Next
+dataset: /kwkj-k8s/llm_team/lys/llm_beachmark-new/terminal-bench/sft_data/qwen38_pass_226_turn_split_v3_fit207k_sub3.jsonl
+output_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/tb226_flash_next_lora_4node_207k
+tensorboard_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/tb226_flash_next_lora_4node_207k/tensorboard
+
+# ---- 模板 / loss ----
+template: qwen3_8
+agent_template: qwen3_5          # 数据带 tools 字段（bash 工具）+ tool_call/tool_response 角色
+template_backend: swift
+enable_thinking: true            # assistant 目标里有 <think>（reasoning_content 已折叠进去）
+add_non_thinking_prefix: false
+loss_scale: last_round           # turn-split 数据：只对最后一个 assistant 轮算 loss（历史轮已去 think）
+disable_ignore_empty_think: true
+truncation_strategy: delete      # 数据已 fit 到 211968，理论上无样本被删
+
+# ---- LoRA ----
+tuner_type: lora
+lora_rank: 32
+lora_alpha: 64
+lora_dropout: 0.05
+lora_dtype: bfloat16
+target_modules: [in_proj, out_proj, linear_proj, linear_qkv, linear_fc1, linear_fc2]   # 注意力 + MoE 专家 FFN
+finetune: true
+merge_lora: false                # 只存 adapter，训完再合并
+freeze_llm: false
+freeze_vit: true
+freeze_aligner: true
+language_model_only: true
+vit_attn_impl: sdpa
+
+# ---- 并行 ----
+tensor_model_parallel_size: 8
+pipeline_model_parallel_size: 2
+expert_model_parallel_size: 16
+expert_tensor_parallel_size: 1
+context_parallel_size: 1         # 必须保持 1 才能走 QSA。CP>1 时 indexer 直接禁用稀疏选择（退化为全注意力）。启动时 CP=2 可覆盖；EP16 在 CP2/DP1 下仍等于 TP*CP*DP
+sequence_parallel: true
+decoder_first_pipeline_num_layers: 22   # 第 0 段带 10GB PLE 表(80GB/TP8)，第 1 段带 248K 词表 logits，层数 22/26 平衡
+
+# ---- 序列 / batch ----
+max_length: 212,992               # 224K = 14*16384：swift 模板下 2321 条(8%)样本超 212992，提到 224K 保住它们
+packing: false                    # 关 packing：否则 megatron 会强制 padding_free=true，QSA 退化为全注意力
+padding_free: false               # QSA 需要 bshd + 自定义 mask；padding_free/thd 下 TE 无法叠 indexer mask
+micro_batch_size: 1
+global_batch_size: 8             # = DP2 x 4 个 microbatch/副本；PP2 下 1F1B 效率 80%，第 0 段同时驻留 2 个 microbatch 激活
+num_train_epochs: 2              # 无 packing：28518 条 / GBS8 ≈ 3.6K 步/epoch，2 epoch ≈ 7.1K 步（短样本会 pad 到 max_length）
+split_dataset_ratio: 0.0         # 同一轨迹切出的样本高度重复，留验证集无意义
+
+# ---- 优化器 ----
+lr: 1e-4
+min_lr: 1e-6
+lr_decay_style: cosine
+lr_warmup_fraction: 0.03
+weight_decay: 0.1
+clip_grad: 1.0
+adam_beta1: 0.9
+adam_beta2: 0.95
+optimizer_cpu_offload: true
+use_precision_aware_optimizer: true
+optimizer_offload_fraction: 1.0
+
+# ---- 显存 / kernel ----
+recompute_granularity: full
+recompute_method: uniform
+recompute_num_layers: 1
+attention_backend: flash
+cross_entropy_loss_fusion: true
+moe_grouped_gemm: true
+moe_permute_fusion: true
+moe_shared_expert_overlap: false
+moe_aux_loss_coeff: 1e-6
+overlap_grad_reduce: true
+
+# ---- 日志 / 保存 ----
+report_to: [tensorboard, swanlab]   # swanlab 云端看曲线（需 secrets.env 里的 SWANLAB_API_KEY），tensorboard 本地兜底
+swanlab_project: tb226_flash_next
+swanlab_exp_name: 4node_207k_tp8pp2ep16_qsa_nopack
+logging_steps: 1
+save_strategy: steps
+save_steps: 100
+save_total_limit: 5
+save_safetensors: true
+no_save_optim: true
+no_save_rng: true
+eval_iters: -1
+
+# ---- 数据处理 ----
+dataloader_num_workers: 4
+dataset_num_proc: 32             # 8.9GB / 28518 条，每机 192 核
+load_from_cache_file: true       # 多机安全：swift 由 global rank0 tokenize，其余 rank barrier 等待后读缓存/广播；缓存目录在共享盘 .cache
+
+external_plugins:
+  - /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/ple_chunked.py        # PLE 按 16K 分块+逐块 checkpoint，消掉 208K 下 ~50GB 的 fp32 临时量（逐位等价，见 ple_chunked_test.py）

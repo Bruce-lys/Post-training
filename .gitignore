@@ -1,0 +1,69 @@
+# ===== 大体积训练产物 / 模型 =====
+outputs/
+merged/
+.cache/
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.distcp
+
+# ===== profile / 日志 =====
+profiles/
+**/profiles/
+logs/
+**/logs/
+*.log
+*.nsys-rep
+*.sqlite
+*.qdrep
+nohup.out
+
+# ===== 虚拟环境 / 缓存 =====
+.venv/
+**/.venv/
+.venv-swift
+uv_env/.venv/
+swift_env/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+node_modules/
+*.egg-info/
+
+# ===== 第三方 vendored 依赖（见 pyextra-requirements.txt）=====
+pyextra/
+
+# ===== 数据集 / 实验数据 =====
+*.jsonl
+multinode/smoke_data/
+data_analysis/*.json
+zhh-tb4/resample/runs/
+zhh-tb4/resample/passes/
+zhh-tb4/*.summary.json
+
+# ===== 密钥 / 凭据（务必保留）=====
+*.key
+*.pem
+api.key
+.env
+.env.*
+*credentials*
+*.secret
+id_rsa*
+id_ed25519*
+
+# ===== 编译产物 =====
+*.so
+*.o
+*.a
+
+# ===== 编辑器 / 系统 =====
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# ===== 嵌套的 mcore-bridge 上游 checkout（改动以 patch 形式留档）=====
+multinode/overlays/mcore-bridge-9d610ffb

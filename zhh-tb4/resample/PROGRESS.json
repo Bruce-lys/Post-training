@@ -1,0 +1,229 @@
+{
+  "wave": 1,
+  "phase": "running",
+  "target": 15,
+  "trials_per_task": 8,
+  "concurrency": 16,
+  "model": "openai/glm-5.3",
+  "base": "https://agrouter-test.agnes-ai.com/v1",
+  "tasks_this_wave": [
+    "batched-eval-parity",
+    "coq-block-bound",
+    "distributed-dedup",
+    "freecad-platform-drawing",
+    "hof-topology-interpenetration",
+    "html-js-filter",
+    "kv-live-surgery",
+    "layout-config-recreation2",
+    "legacy-utility-triage",
+    "live-database-cutover",
+    "payments-pipeline-fix",
+    "protein-autointerp-disulfide",
+    "risk-scorer-replay",
+    "rs-archive-clone",
+    "satb-audio-transcription",
+    "sound-change-cascade",
+    "telecom-entity-resolution",
+    "uefi-bootkit",
+    "vba-userform-port",
+    "vf2-speedup-networkx",
+    "wdm-design"
+  ],
+  "tasks_still_short": 21,
+  "still_short": [
+    "batched-eval-parity",
+    "coq-block-bound",
+    "distributed-dedup",
+    "freecad-platform-drawing",
+    "hof-topology-interpenetration",
+    "html-js-filter",
+    "kv-live-surgery",
+    "layout-config-recreation2",
+    "legacy-utility-triage",
+    "live-database-cutover",
+    "payments-pipeline-fix",
+    "protein-autointerp-disulfide",
+    "risk-scorer-replay",
+    "rs-archive-clone",
+    "satb-audio-transcription",
+    "sound-change-cascade",
+    "telecom-entity-resolution",
+    "uefi-bootkit",
+    "vba-userform-port",
+    "vf2-speedup-networkx",
+    "wdm-design"
+  ],
+  "wave_trials_done": 3,
+  "wave_trials_expected": 168,
+  "tasks": {
+    "batched-eval-parity": {
+      "have_before_wave": 3,
+      "target": 15,
+      "wave_trials_done": 1,
+      "wave_scored": 1,
+      "wave_passed": 1,
+      "projected": 4
+    },
+    "coq-block-bound": {
+      "have_before_wave": 8,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 8
+    },
+    "distributed-dedup": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "freecad-platform-drawing": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "hof-topology-interpenetration": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "html-js-filter": {
+      "have_before_wave": 8,
+      "target": 15,
+      "wave_trials_done": 1,
+      "wave_scored": 1,
+      "wave_passed": 0,
+      "projected": 8
+    },
+    "kv-live-surgery": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "layout-config-recreation2": {
+      "have_before_wave": 5,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 5
+    },
+    "legacy-utility-triage": {
+      "have_before_wave": 2,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 2
+    },
+    "live-database-cutover": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "payments-pipeline-fix": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "protein-autointerp-disulfide": {
+      "have_before_wave": 7,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 7
+    },
+    "risk-scorer-replay": {
+      "have_before_wave": 8,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 8
+    },
+    "rs-archive-clone": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "satb-audio-transcription": {
+      "have_before_wave": 1,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 1
+    },
+    "sound-change-cascade": {
+      "have_before_wave": 3,
+      "target": 15,
+      "wave_trials_done": 1,
+      "wave_scored": 1,
+      "wave_passed": 1,
+      "projected": 4
+    },
+    "telecom-entity-resolution": {
+      "have_before_wave": 7,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 7
+    },
+    "uefi-bootkit": {
+      "have_before_wave": 2,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 2
+    },
+    "vba-userform-port": {
+      "have_before_wave": 6,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 6
+    },
+    "vf2-speedup-networkx": {
+      "have_before_wave": 2,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 2
+    },
+    "wdm-design": {
+      "have_before_wave": 5,
+      "target": 15,
+      "wave_trials_done": 0,
+      "wave_scored": 0,
+      "wave_passed": 0,
+      "projected": 5
+    }
+  },
+  "job_dir": "/kwkj-k8s/llm_team/lys/megatron-swift/zhh-tb4/resample/runs/glm53_resample_wave1"
+}

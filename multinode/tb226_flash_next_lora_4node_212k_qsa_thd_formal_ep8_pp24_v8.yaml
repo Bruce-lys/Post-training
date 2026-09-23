@@ -1,0 +1,127 @@
+# Qwen3.8-Flash-Next LoRA SFT | 4 nodes x 8 H200 | QSA THD formal, v8 (2026-09-18) = v7 + lengths file in swift shuffled order
+# v7 -> v8: swift shuffles the dataset at load (HF shuffle, seed get_seed(RandomState(data_seed))); the sampler index refers
+#   to the shuffled position, so the DP balance plugin must read lengths in that order. Verified on the S8 smoke (56/56
+#   microbatch token counts explained) and on the formal step-299 OOM sample. Model math unchanged; only the grouping
+#   of samples into DP replicas per step changes (that is what the plugin was always meant to do).
+# v5 -> v6: the allocator setting was passed as PYTORCH_ALLOC_CONF, which torch 2.9.1 ignores (verified with a
+#   memory-history probe: no segment_map events). PYTORCH_CUDA_ALLOC_CONF actually enables expandable segments,
+#   which is the intended fragmentation control behind the step-299 OOM. Math-neutral.
+# v3 -> v5:
+#   external_plugins += cuda_cache_release.py : torch.cuda.empty_cache() before each microbatch forward and after
+#     each step. Fixes the step-299 OOM (last PP stage: 49.4 GiB live, 62.5 GiB fragmented cache, a 23.55 GiB fp32
+#     logits allocation for a 204k-token microbatch failed with 19.4 GiB physically free). Math-neutral.
+#   resume: mcore_adapter -> v3 checkpoint-250, finetune: false (loads optimizer, rng and iteration 250)
+# Cross-entropy stays native/fused: TE 2.14 fused CE stores dL/dlogits in bf16 during forward (Megatron-LM #5115,
+#   fixed only in TE >= 2.18/2.19), so it is NOT used for the formal run.
+# Everything else identical to v3 (EP=8, PP 24/24, no optimizer CPU offload, packing=false, dp_balance_order).
+ENV:
+  NPROC_PER_NODE: 8
+  CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
+  CUDA_DEVICE_MAX_CONNECTIONS: 1
+  PYTHONUNBUFFERED: 1
+  PYTORCH_ALLOC_CONF: expandable_segments:True,garbage_collection_threshold:0.8
+  PYTORCH_CUDA_ALLOC_CONF: expandable_segments:True,garbage_collection_threshold:0.8   # torch 2.9.1 in .venv-swift only honours this name (probe 2026-09-18); PYTORCH_ALLOC_CONF was silently ignored
+  TORCHDYNAMO_DISABLE: 1
+  TORCH_COMPILE_DISABLE: 1
+  USE_MCORE_GDN: 'True'
+  QSA_SPARSE_KERNEL: 'True'
+  PLE_CHUNK_SIZE: 16384
+  DP_BALANCE_ORDER: 'True'
+  DP_BALANCE_LENGTHS_FILE: /kwkj-k8s/llm_team/lys/megatron-swift/data_analysis/tb226_v3_lengths_by_row.shuffled_seed42.json
+  MODELSCOPE_CACHE: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/modelscope
+  HF_HOME: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/huggingface
+  NCCL_IB_HCA: ib7s400
+  NCCL_SOCKET_IFNAME: ib6s200p0
+  GLOO_SOCKET_IFNAME: ib6s200p0
+  NCCL_DEBUG: WARN
+  TORCH_NCCL_ASYNC_ERROR_HANDLING: 1
+model: /kwkj-k8s/llm_team/models/Qwen3.8-Flash-Next
+dataset: /kwkj-k8s/llm_team/lys/llm_beachmark-new/terminal-bench/sft_data/qwen38_pass_226_turn_split_v3_fit207k_sub3.jsonl
+output_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/tb226_flash_next_lora_4node_212k_qsa_thd_formal_ep8_pp24_v3
+tensorboard_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/tb226_flash_next_lora_4node_212k_qsa_thd_formal_ep8_pp24_v3/tensorboard
+template: qwen3_8
+agent_template: qwen3_5
+template_backend: swift
+enable_thinking: true
+add_non_thinking_prefix: false
+loss_scale: last_round
+disable_ignore_empty_think: true
+truncation_strategy: delete
+tuner_type: lora
+lora_rank: 32
+lora_alpha: 64
+lora_dropout: 0.05
+lora_dtype: bfloat16
+target_modules:
+- in_proj
+- out_proj
+- linear_proj
+- linear_qkv
+- linear_fc1
+- linear_fc2
+finetune: false
+mcore_adapter: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/tb226_flash_next_lora_4node_212k_qsa_thd_formal_ep8_pp24_v3/v0-20260918-013006/checkpoint-250
+merge_lora: false
+freeze_llm: false
+freeze_vit: true
+freeze_aligner: true
+language_model_only: true
+vit_attn_impl: sdpa
+tensor_model_parallel_size: 8
+pipeline_model_parallel_size: 2
+expert_model_parallel_size: 8
+expert_tensor_parallel_size: 1
+context_parallel_size: 1
+sequence_parallel: true
+decoder_first_pipeline_num_layers: 24
+max_length: 212992
+packing: false
+padding_free: true
+apply_rope_fusion: false
+group_by_length: false
+data_sharding: false
+dataset_shuffle: true
+micro_batch_size: 1
+global_batch_size: 8
+num_train_epochs: 1
+split_dataset_ratio: 0.0
+lr: 1e-4
+min_lr: 1e-6
+lr_decay_style: cosine
+lr_warmup_fraction: 0.03
+weight_decay: 0.1
+clip_grad: 1.0
+adam_beta1: 0.9
+adam_beta2: 0.95
+optimizer_cpu_offload: false
+use_precision_aware_optimizer: true
+recompute_granularity: full
+recompute_method: uniform
+recompute_num_layers: 1
+attention_backend: flash
+cross_entropy_loss_fusion: true
+moe_grouped_gemm: true
+moe_permute_fusion: true
+moe_shared_expert_overlap: false
+moe_aux_loss_coeff: 1e-6
+overlap_grad_reduce: true
+report_to:
+- tensorboard
+swanlab_project: tb226_flash_next
+swanlab_exp_name: 4node_212k_tp8pp2ep8_pp24_balorder_shuffledlen_cachefree_allocfix_bitmapchunk_resume250_formal_1epoch
+logging_steps: 1
+save_strategy: steps
+save_steps: 250
+save_total_limit: 3
+save_safetensors: true
+no_save_optim: false
+no_save_rng: false
+eval_iters: -1
+dataloader_num_workers: 0
+dataloader_persistent_workers: false
+dataset_num_proc: 32
+load_from_cache_file: true
+external_plugins:
+- /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/ple_chunked.py
+- /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/dp_balance_order.py
+- /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/cuda_cache_release.py

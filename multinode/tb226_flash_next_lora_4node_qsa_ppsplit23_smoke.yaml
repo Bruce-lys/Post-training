@@ -1,0 +1,109 @@
+ENV:
+  NPROC_PER_NODE: 8
+  CUDA_VISIBLE_DEVICES: 0,1,2,3,4,5,6,7
+  CUDA_DEVICE_MAX_CONNECTIONS: 1
+  PYTHONUNBUFFERED: 1
+  PYTORCH_ALLOC_CONF: expandable_segments:True,garbage_collection_threshold:0.8
+  TORCHDYNAMO_DISABLE: 1
+  TORCH_COMPILE_DISABLE: 1
+  USE_MCORE_GDN: 'True'
+  QSA_SPARSE_KERNEL: 'True'
+  PLE_CHUNK_SIZE: 16384
+  PROFILE_DISABLE_SAVE: 1
+  MODELSCOPE_CACHE: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/modelscope
+  HF_HOME: /kwkj-k8s/llm_team/lys/megatron-swift/.cache/huggingface
+  NCCL_IB_HCA: ib7s400
+  NCCL_SOCKET_IFNAME: ib6s200p0
+  GLOO_SOCKET_IFNAME: ib6s200p0
+  NCCL_DEBUG: WARN
+  TORCH_NCCL_ASYNC_ERROR_HANDLING: 1
+  PP_FIRST_LAYERS: 23
+  PERF_STEP_LABELS: W1,W2,M1,M2,M3
+model: /kwkj-k8s/llm_team/models/Qwen3.8-Flash-Next
+dataset: /kwkj-k8s/llm_team/lys/megatron-swift/multinode/smoke_data/pp_split_ab/real_step5_repeated_40rows.jsonl
+output_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/qsa4node_ppsplit23_smoke
+tensorboard_dir: /kwkj-k8s/llm_team/lys/megatron-swift/outputs/qsa4node_ppsplit23_smoke/tensorboard
+template: qwen3_8
+agent_template: qwen3_5
+template_backend: swift
+enable_thinking: true
+add_non_thinking_prefix: false
+loss_scale: last_round
+disable_ignore_empty_think: true
+truncation_strategy: delete
+tuner_type: lora
+lora_rank: 32
+lora_alpha: 64
+lora_dropout: 0.05
+lora_dtype: bfloat16
+target_modules:
+- in_proj
+- out_proj
+- linear_proj
+- linear_qkv
+- linear_fc1
+- linear_fc2
+finetune: true
+merge_lora: false
+freeze_llm: false
+freeze_vit: true
+freeze_aligner: true
+language_model_only: true
+vit_attn_impl: sdpa
+tensor_model_parallel_size: 8
+pipeline_model_parallel_size: 2
+expert_model_parallel_size: 16
+expert_tensor_parallel_size: 1
+context_parallel_size: 1
+sequence_parallel: true
+decoder_first_pipeline_num_layers: 23
+max_length: 212992
+packing: false
+padding_free: true
+apply_rope_fusion: false
+group_by_length: false
+micro_batch_size: 1
+global_batch_size: 8
+split_dataset_ratio: 0.0
+dataset_shuffle: false
+train_dataloader_shuffle: false
+data_seed: 42
+lr: 1e-4
+min_lr: 1e-6
+lr_decay_style: cosine
+lr_warmup_fraction: 0.03
+weight_decay: 0.1
+clip_grad: 1.0
+adam_beta1: 0.9
+adam_beta2: 0.95
+optimizer_cpu_offload: true
+use_precision_aware_optimizer: true
+optimizer_offload_fraction: 1.0
+recompute_granularity: full
+recompute_method: uniform
+recompute_num_layers: 1
+attention_backend: flash
+cross_entropy_loss_fusion: true
+moe_grouped_gemm: true
+moe_permute_fusion: true
+moe_shared_expert_overlap: false
+moe_aux_loss_coeff: 1e-6
+overlap_grad_reduce: true
+report_to:
+- tensorboard
+logging_steps: 1
+save_strategy: steps
+save_steps: 1000000
+save_total_limit: 2
+save_safetensors: true
+no_save_optim: true
+no_save_rng: true
+eval_iters: -1
+dataloader_num_workers: 0
+dataloader_persistent_workers: false
+dataset_num_proc: 8
+load_from_cache_file: false
+external_plugins:
+- /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/ple_chunked.py
+- /kwkj-k8s/llm_team/lys/megatron-swift/multinode/plugins/pp_split_timing.py
+train_iters: 5

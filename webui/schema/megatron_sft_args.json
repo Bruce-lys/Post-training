@@ -1,0 +1,2689 @@
+{
+ "use_ray": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "ray_exp_name": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "device_groups": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "model_type": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "model_revision": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "task_type": {
+  "default": null,
+  "type": "typing.Literal['causal_lm', 'seq_cls', 'embedding', 'generative_reranker']",
+  "choices": [
+   "causal_lm",
+   "seq_cls",
+   "embedding",
+   "generative_reranker"
+  ],
+  "help": null
+ },
+ "torch_dtype": {
+  "default": null,
+  "type": "typing.Union[torch.dtype, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "attn_impl": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "experts_impl": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "new_special_tokens": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "num_labels": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "problem_type": {
+  "default": null,
+  "type": "typing.Literal['regression', 'single_label_classification', 'multi_label_classification']",
+  "choices": [
+   "regression",
+   "single_label_classification",
+   "multi_label_classification"
+  ],
+  "help": null
+ },
+ "rope_scaling": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "device_map": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "max_memory": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "max_model_len": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "local_repo_path": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "init_strategy": {
+  "default": null,
+  "type": "typing.Literal['zero', 'uniform', 'normal', 'xavier_uniform', 'xavier_normal', 'kaiming_uniform', 'kaiming_normal', 'orthogonal']",
+  "choices": [
+   "zero",
+   "uniform",
+   "normal",
+   "xavier_uniform",
+   "xavier_normal",
+   "kaiming_uniform",
+   "kaiming_normal",
+   "orthogonal"
+  ],
+  "help": null
+ },
+ "template": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": "template choices: ['chatml', 'dummy', 'emu3_gen', 'emu3_chat', 'bge_reranker', 'ernie', 'ernie_thinking', 'paddle_ocr', 'ernie_vl', 'ernie_vl_thinking', 'paddle_ocr_1_5', 'bert', 'deepseek', 'deepseek_coder', 'deepseek_vl', 'deepseek_janus', 'deepseek_ocr', 'deepseek_ocr2', 'unlimited_ocr', 'deepseek_v2_5', 'deepseek_r1', 'deepseek_v3_1', 'deepseek_v4', 'deepseek_v4_flash', 'deepseek_vl2', 'deepseek_janus_pro', 'dots_ocr', 'gemma', 'paligemma', 'gemma3_text', 'gemma3_vision', 'gemma3n', 'gemma4_nothinking', 'gemma4', 'diffusion_gemma', 'chatglm2', 'chatglm4v', 'chatglm4', 'glm4', 'glm4v', 'glm4_5', 'glm4_7', 'glm5_1', 'glm5_2', 'glm4_5v', 'glm4_z1_rumination', 'codegeex4', 'longwriter_llama', 'cogagent_chat', 'cogagent_vqa', 'cogvlm', 'cogvlm2', 'cogvlm2_video', 'glm_edge_v', 'glm_ocr', 'idefics3', 'internlm', 'internlm2', 'internlm2_reward', 'ixcomposer2', 'xcomposer2_5', 'xcomposer2_4khd', 'llama', 'llama3', 'llama3_2', 'llama3_2_vision', 'llama4', 'reflection', 'llama3_1_omni', 'qwen', 'qwen2_5', 'qwq_preview', 'qwq', 'qwen3', 'qwen3_guard', 'qwen3_thinking', 'qwen3_nothinking', 'qwen3_coder', 'qwen3_emb', 'qwen3_reranker', 'qwen2_5_math', 'qwen2_5_math_prm', 'qwen_vl', 'qwen_audio', 'qwen2_audio', 'qwen2_vl', 'qvq', 'qwen2_5_vl', 'mimo_vl', 'qwen3_vl', 'qwen3_5', 'qwen3_8', 'ovis_ocr2', 'qwen3_5_emb', 'qwen3_vl_emb', 'wemm_embedding', 'qwen3_vl_reranker', 'qwen2_5_omni', 'qwen3_omni', 'qwen3_asr', 'qwen3_tts', 'ovis1_6', 'ovis1_6_llama3', 'ovis2', 'ovis2_5', 'marco_o1', 'yufeng_xguard', 'default', 'modelscope_agent', 'qwen2_gme', 'jina_reranker_m0', 'baichuan', 'baichuan_m1', 'numina', 'mistral_nemo', 'xverse', 'yuan', 'ziya', 'skywork', 'skywork_o1', 'bluelm', 'codefuse_codellama', 'codefuse', 'zephyr', 'sus', 'orion', 'telechat', 'telechat2', 'dbrx', 'mengzi', 'c4ai', 'wizardlm2', 'wizardlm2_moe', 'atom', 'aya', 'ling', 'mimo_rl', 'dots1', 'hunyuan_moe', 'hunyuan', 'hy_v3_preview', 'hy_v3', 'gpt_oss', 'longchat', 'ling2', 'ling3', 'ring2', 'ring2_5', 'iquestcoder', 'youtu_llm', 'olmoe', 'olmoe_0924', 'nemotron_h', 'florence', 'phi3', 'phi4', 'phi3_vision', 'phi4_multimodal', 'internvl', 'internvl_phi3', 'internvl2', 'internvl2_phi3', 'internvl2_5', 'internvl3_5', 'internvl3_5_gpt', 'interns1', 'internvl_hf', 'keye_vl', 'keye_vl_1_5', 'llava1_5_hf', 'llava_next_video_hf', 'llava1_6_mistral_hf', 'llava1_6_vicuna_hf', 'llava1_6_yi_hf', 'llama3_llava_next_hf', 'llava_next_qwen_hf', 'llava_onevision_hf', 'llava_llama3_1_hf', 'llava_llama3_hf', 'llava1_6_mistral', 'llava1_6_yi', 'llama3_llava_next', 'llava_next_qwen', 'llava_onevision1_5', 'llava_onevision2', 'megrez', 'megrez_omni', 'midashenglm', 'mimo_v2', 'minicpm', 'minicpmv', 'minicpmv2_5', 'minicpmv2_6', 'minicpmv4', 'minicpmo', 'minicpmv4_5', 'minicpmo4_5', 'minicpmv4_6', 'minicpm5', 'minimax', 'minimax_m1', 'minimax_vl', 'minimax_m2', 'minimax_m2_1', 'minimax_m2_5', 'minimax_m2_7', 'minimax_m3_vl', 'minimind', 'mistral_2501', 'mistral_2503', 'devstral', 'mistral_2506', 'mistral_2512', 'mistral_2512_thinking', 'molmo', 'molmo2', 'moonlight', 'kimi_k2', 'kimi_vl', 'kimi_k25', 'kimi_k3', 'moss_vl', 'mplug_owl2', 'mplug_owl3', 'mplug_owl3_241101', 'doc_owl2', 'muse_glimmer', 'openbuddy', 'openbuddy2', 'pixtral', 'seed_oss', 'sail_vl2', 'got_ocr2', 'got_ocr2_hf', 'step_audio2_mini', 'step_audio', 'step3_vl', 'hunyuan_ocr', 'valley', 'yi_coder', 'yi_vl']"
+ },
+ "system": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "max_length": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "truncation_strategy": {
+  "default": null,
+  "type": "typing.Literal['delete', 'left', 'right', 'split', None]",
+  "choices": [
+   "delete",
+   "left",
+   "right",
+   "split",
+   null
+  ],
+  "help": null
+ },
+ "max_pixels": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "agent_template": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "norm_bbox": {
+  "default": null,
+  "type": "typing.Literal['norm1000', 'none', None]",
+  "choices": [
+   "norm1000",
+   "none",
+   null
+  ],
+  "help": null
+ },
+ "use_chat_template": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "padding_side": {
+  "default": "right",
+  "type": "typing.Literal['left', 'right']",
+  "choices": [
+   "left",
+   "right"
+  ],
+  "help": null
+ },
+ "padding_free": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "loss_scale": {
+  "default": "default",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "sequence_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "is_binary_loss_scale": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "template_backend": {
+  "default": "swift",
+  "type": "typing.Literal['swift', 'jinja']",
+  "choices": [
+   "swift",
+   "jinja"
+  ],
+  "help": null
+ },
+ "response_prefix": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "enable_thinking": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "preserve_thinking": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "add_non_thinking_prefix": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "disable_ignore_empty_think": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dataset": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "val_dataset": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "cached_dataset": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "cached_val_dataset": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "split_dataset_ratio": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "data_seed": {
+  "default": 42,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "dataset_num_proc": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "load_from_cache_file": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dataset_shuffle": {
+  "default": true,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "val_dataset_shuffle": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "streaming": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "interleave_prob": {
+  "default": null,
+  "type": "typing.Optional[typing.List[float]]",
+  "choices": null,
+  "help": null
+ },
+ "stopping_strategy": {
+  "default": "first_exhausted",
+  "type": "typing.Literal['first_exhausted', 'all_exhausted']",
+  "choices": [
+   "first_exhausted",
+   "all_exhausted"
+  ],
+  "help": null
+ },
+ "shuffle_buffer_size": {
+  "default": 1000,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "download_mode": {
+  "default": "reuse_dataset_if_exists",
+  "type": "typing.Literal['force_redownload', 'reuse_dataset_if_exists']",
+  "choices": [
+   "force_redownload",
+   "reuse_dataset_if_exists"
+  ],
+  "help": null
+ },
+ "columns": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "strict": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "remove_unused_columns": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "disable_auto_column_mapping": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "model_name": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": "e.g. ['小黄', 'Xiao Huang']"
+ },
+ "model_author": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": "e.g. ['魔搭', 'ModelScope']"
+ },
+ "custom_dataset_info": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "quant_method": {
+  "default": null,
+  "type": "typing.Literal['bnb', 'hqq', 'eetq', 'quanto', 'fp8']",
+  "choices": [
+   "bnb",
+   "hqq",
+   "eetq",
+   "quanto",
+   "fp8"
+  ],
+  "help": null
+ },
+ "quant_bits": {
+  "default": null,
+  "type": "typing.Literal[1, 2, 3, 4, 8, 'float8']",
+  "choices": [
+   1,
+   2,
+   3,
+   4,
+   8,
+   "float8"
+  ],
+  "help": null
+ },
+ "hqq_axis": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "bnb_4bit_compute_dtype": {
+  "default": null,
+  "type": "typing.Literal['float16', 'bfloat16', 'float32', None]",
+  "choices": [
+   "float16",
+   "bfloat16",
+   "float32",
+   null
+  ],
+  "help": null
+ },
+ "bnb_4bit_quant_type": {
+  "default": "nf4",
+  "type": "typing.Literal['fp4', 'nf4']",
+  "choices": [
+   "fp4",
+   "nf4"
+  ],
+  "help": null
+ },
+ "bnb_4bit_use_double_quant": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "bnb_4bit_quant_storage": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "max_new_tokens": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "temperature": {
+  "default": 0.9,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "top_k": {
+  "default": -1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "top_p": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "repetition_penalty": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "num_beams": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "stream": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "stop_words": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "logprobs": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "top_logprobs": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "structured_outputs_regex": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "tuner_backend": {
+  "default": "peft",
+  "type": "typing.Literal['peft', 'unsloth']",
+  "choices": [
+   "peft",
+   "unsloth"
+  ],
+  "help": null
+ },
+ "tuner_type": {
+  "default": "full",
+  "type": "typing.Literal['lora', 'full', 'lora_llm']",
+  "choices": [
+   "lora",
+   "full",
+   "lora_llm"
+  ],
+  "help": null
+ },
+ "adapters": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "external_plugins": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "custom_register_path": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "seed": {
+  "default": 42,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "model_kwargs": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "enable_npu_model_patch": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "load_args": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "load_data_args": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "packing": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "packing_length": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "packing_num_proc": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "packing_strategy": {
+  "default": "binpack",
+  "type": "typing.Literal['binpack', 'sequential']",
+  "choices": [
+   "binpack",
+   "sequential"
+  ],
+  "help": null
+ },
+ "lazy_tokenize": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "use_hf": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "hub_token": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": "SDK token can be found in https://modelscope.cn/my/myaccesstoken"
+ },
+ "ddp_timeout": {
+  "default": 18000000,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "ddp_backend": {
+  "default": "nccl",
+  "type": "typing.Literal['nccl', 'gloo']",
+  "choices": [
+   "nccl",
+   "gloo"
+  ],
+  "help": null
+ },
+ "ignore_args_error": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_swift_lora": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "freeze_llm": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "freeze_vit": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "freeze_aligner": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "freeze_parameters": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "freeze_parameters_regex": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "freeze_parameters_ratio": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "trainable_parameters": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "trainable_parameters_regex": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "target_modules": {
+  "default": [
+   "all-linear"
+  ],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "target_regex": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "modules_to_save": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "lora_rank": {
+  "default": 8,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "lora_alpha": {
+  "default": 32,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "lora_dropout": {
+  "default": 0.05,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "lora_bias": {
+  "default": "none",
+  "type": "typing.Literal['none', 'all']",
+  "choices": [
+   "none",
+   "all"
+  ],
+  "help": null
+ },
+ "lora_dtype": {
+  "default": null,
+  "type": "typing.Literal['float16', 'bfloat16', 'float32', None]",
+  "choices": [
+   "float16",
+   "bfloat16",
+   "float32",
+   null
+  ],
+  "help": null
+ },
+ "use_rslora": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "rlhf_type": {
+  "default": null,
+  "type": "typing.Literal['dpo', 'kto', 'grpo', 'gkd', 'rm']",
+  "choices": [
+   "dpo",
+   "kto",
+   "grpo",
+   "gkd",
+   "rm"
+  ],
+  "help": null
+ },
+ "loss_type": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "mcore_ref_model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "mcore_ref_adapter": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "beta": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "rpo_alpha": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "reference_free": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "label_smoothing": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "f_divergence_type": {
+  "default": "reverse_kl",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "desirable_weight": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "undesirable_weight": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "calculate_KL": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "center_rewards_coefficient": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "teacher_model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "teacher_model_type": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "teacher_model_revision": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "_teacher_use_disable_adapter": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "teacher_model_server": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": "URL of the teacher model server (e.g., http://localhost:8000). When set, teacher logprobs are fetched via API instead of loading a local model. Supports multi-teacher via JSON."
+ },
+ "teacher_tag_key": {
+  "default": "dataset",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": "Column name for multi-teacher routing. Default \"dataset\"."
+ },
+ "gkd_logits_topk": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "lmbda": {
+  "default": 0.5,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "seq_kd": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "offload_teacher_model": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "sft_alpha": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "teacher_kl_coef": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "generation_batch_size": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "steps_per_generation": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "num_generations": {
+  "default": 8,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "num_generations_eval": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "max_completion_length": {
+  "default": 512,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "importance_sampling_level": {
+  "default": "token",
+  "type": "typing.Literal['token', 'sequence', 'sequence_token']",
+  "choices": [
+   "token",
+   "sequence",
+   "sequence_token"
+  ],
+  "help": null
+ },
+ "tau_pos": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "tau_neg": {
+  "default": 1.05,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "real_tau": {
+  "default": 0.5,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "fipo_decay_rate": {
+  "default": 32.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "fipo_clip_range": {
+  "default": 0.2,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "fipo_clip_high_only": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "fipo_safety_threshold": {
+  "default": 4.0,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "epsilon": {
+  "default": 0.2,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "epsilon_high": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "delta": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "use_vllm": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_mode": {
+  "default": null,
+  "type": "typing.Optional[typing.Literal['server', 'colocate']]",
+  "choices": [
+   "server",
+   "colocate"
+  ],
+  "help": null
+ },
+ "vllm_enable_prefix_caching": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_gpu_memory_utilization": {
+  "default": 0.9,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_tensor_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_max_model_len": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_enforce_eager": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_limit_mm_per_prompt": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_disable_cascade_attn": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_max_num_seqs": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_mm_processor_cache_gb": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_engine_kwargs": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_enable_lora": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "sleep_level": {
+  "default": 0,
+  "type": "typing.Literal[0, 1, 2]",
+  "choices": [
+   0,
+   1,
+   2
+  ],
+  "help": null
+ },
+ "offload_optimizer": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "offload_model": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "offload_bridge": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_server_base_url": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_server_host": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_server_port": {
+  "default": [
+   8000
+  ],
+  "type": "typing.List[int]",
+  "choices": null,
+  "help": null
+ },
+ "vllm_server_timeout": {
+  "default": 240.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "vllm_server_group_port": {
+  "default": null,
+  "type": "typing.Optional[typing.List[int]]",
+  "choices": null,
+  "help": null
+ },
+ "reward_funcs": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "reward_weights": {
+  "default": null,
+  "type": "typing.List[float]",
+  "choices": null,
+  "help": null
+ },
+ "cosine_min_len_value_wrong": {
+  "default": -0.5,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "cosine_max_len_value_wrong": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "cosine_min_len_value_correct": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "cosine_max_len_value_correct": {
+  "default": 0.5,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "cosine_max_len": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "repetition_n_grams": {
+  "default": 3,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "repetition_max_penalty": {
+  "default": -1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "soft_max_length": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "soft_cache_length": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "dynamic_sample": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "max_resample_times": {
+  "default": 3,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "overlong_filter": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "scale_rewards": {
+  "default": "group",
+  "type": "typing.Literal['none', 'group', 'batch', 'gdpo']",
+  "choices": [
+   "none",
+   "group",
+   "batch",
+   "gdpo"
+  ],
+  "help": null
+ },
+ "advantage_estimator": {
+  "default": "grpo",
+  "type": "typing.Literal['grpo', 'rloo', 'reinforce_plus_plus']",
+  "choices": [
+   "grpo",
+   "rloo",
+   "reinforce_plus_plus"
+  ],
+  "help": null
+ },
+ "kl_in_reward": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "wandb_log_unique_prompts": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "log_completions": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "rollout_importance_sampling_mode": {
+  "default": null,
+  "type": "typing.Optional[typing.Literal['token_truncate', 'token_mask', 'sequence_truncate', 'sequence_mask']]",
+  "choices": [
+   "token_truncate",
+   "token_mask",
+   "sequence_truncate",
+   "sequence_mask"
+  ],
+  "help": null
+ },
+ "rollout_importance_sampling_threshold": {
+  "default": 2.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "log_rollout_offpolicy_metrics": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "off_policy_sequence_mask_delta": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "log_entropy": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "top_entropy_quantile": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "router_replay_mode": {
+  "default": "disabled",
+  "type": "typing.Literal['disabled', 'R2', 'R3']",
+  "choices": [
+   "disabled",
+   "R2",
+   "R3"
+  ],
+  "help": null
+ },
+ "reward_model": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": null
+ },
+ "reward_model_plugin": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": null
+ },
+ "sync_ref_model": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "ref_model_sync_steps": {
+  "default": 512,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "ref_model_mixup_alpha": {
+  "default": 0.6,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "async_generate": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "move_model_batches": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "multi_turn_scheduler": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "max_turns": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "completion_length_limit_scope": {
+  "default": "per_round",
+  "type": "typing.Literal['total', 'per_round']",
+  "choices": [
+   "total",
+   "per_round"
+  ],
+  "help": null
+ },
+ "vllm_server_pass_dataset": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_gym_env": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "gym_env": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "num_iterations": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "micro_batch_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "global_batch_size": {
+  "default": 16,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "recompute_granularity": {
+  "default": "selective",
+  "type": "typing.Literal['selective', 'full', 'none']",
+  "choices": [
+   "selective",
+   "full",
+   "none"
+  ],
+  "help": null
+ },
+ "recompute_method": {
+  "default": null,
+  "type": "typing.Literal['uniform', 'block']",
+  "choices": [
+   "uniform",
+   "block"
+  ],
+  "help": null
+ },
+ "recompute_num_layers": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "recompute_modules": {
+  "default": [
+   "core_attn"
+  ],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "train_iters": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "num_train_epochs": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "masked_softmax_fusion": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "bias_dropout_fusion": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "bias_activation_fusion": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "apply_rope_fusion": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "gradient_accumulation_fusion": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "cross_entropy_loss_fusion": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "cross_entropy_fusion_impl": {
+  "default": "native",
+  "type": "typing.Literal['native', 'te']",
+  "choices": [
+   "native",
+   "te"
+  ],
+  "help": null
+ },
+ "calculate_per_token_loss": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "attention_backend": {
+  "default": "flash",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "optimizer": {
+  "default": "adam",
+  "type": "typing.Literal['adam', 'sgd', 'muon', 'dist_muon']",
+  "choices": [
+   "adam",
+   "sgd",
+   "muon",
+   "dist_muon"
+  ],
+  "help": null
+ },
+ "optimizer_cpu_offload": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "optimizer_offload_fraction": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "optimizer_cuda_graph": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_precision_aware_optimizer": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "main_grads_dtype": {
+  "default": "fp32",
+  "type": "typing.Literal['fp32', 'bf16']",
+  "choices": [
+   "fp32",
+   "bf16"
+  ],
+  "help": null
+ },
+ "main_params_dtype": {
+  "default": "fp32",
+  "type": "typing.Literal['fp32', 'fp16']",
+  "choices": [
+   "fp32",
+   "fp16"
+  ],
+  "help": null
+ },
+ "exp_avg_dtype": {
+  "default": "fp32",
+  "type": "typing.Literal['fp32', 'fp16', 'bf16', 'fp8']",
+  "choices": [
+   "fp32",
+   "fp16",
+   "bf16",
+   "fp8"
+  ],
+  "help": null
+ },
+ "exp_avg_sq_dtype": {
+  "default": "fp32",
+  "type": "typing.Literal['fp32', 'fp16', 'bf16', 'fp8']",
+  "choices": [
+   "fp32",
+   "fp16",
+   "bf16",
+   "fp8"
+  ],
+  "help": null
+ },
+ "manual_gc": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "manual_gc_steps": {
+  "default": 0,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "manual_gc_eval": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "train_dataloader_shuffle": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dataloader_num_workers": {
+  "default": 4,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "dataloader_pin_memory": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dataloader_persistent_workers": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dataloader_prefetch_factor": {
+  "default": 2,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "dataloader_multiprocessing_context": {
+  "default": null,
+  "type": "typing.Optional[typing.Literal['fork', 'spawn', 'forkserver']]",
+  "choices": [
+   "fork",
+   "spawn",
+   "forkserver"
+  ],
+  "help": null
+ },
+ "data_sharding": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "group_by_length": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "te_rng_tracker": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "data_parallel_random_init": {
+  "default": false,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "mlp_padding_free": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "lr_warmup_init": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "lr": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "lr_decay_style": {
+  "default": "cosine",
+  "type": "typing.Literal['constant', 'linear', 'cosine', 'inverse-square-root', 'WSD']",
+  "choices": [
+   "constant",
+   "linear",
+   "cosine",
+   "inverse-square-root",
+   "WSD"
+  ],
+  "help": null
+ },
+ "lr_decay_iters": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "lr_warmup_iters": {
+  "default": 0,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "lr_warmup_fraction": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "min_lr": {
+  "default": 0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "lr_wsd_decay_style": {
+  "default": "exponential",
+  "type": "typing.Literal['exponential', 'linear', 'cosine', 'minus_sqrt']",
+  "choices": [
+   "exponential",
+   "linear",
+   "cosine",
+   "minus_sqrt"
+  ],
+  "help": null
+ },
+ "lr_wsd_decay_iters": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "weight_decay": {
+  "default": 0.1,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "weight_decay_incr_style": {
+  "default": "constant",
+  "type": "typing.Literal['constant', 'linear', 'cosine']",
+  "choices": [
+   "constant",
+   "linear",
+   "cosine"
+  ],
+  "help": null
+ },
+ "start_weight_decay": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "end_weight_decay": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "clip_grad": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "adam_beta1": {
+  "default": 0.9,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "adam_beta2": {
+  "default": 0.95,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "adam_eps": {
+  "default": 1e-08,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "sgd_momentum": {
+  "default": 0.9,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_momentum": {
+  "default": 0.9,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_split_qkv": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_use_nesterov": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_scale_mode": {
+  "default": "spectral",
+  "type": "typing.Literal['spectral', 'unit_rms_norm', 'shape_scaling']",
+  "choices": [
+   "spectral",
+   "unit_rms_norm",
+   "shape_scaling"
+  ],
+  "help": null
+ },
+ "muon_fp32_matmul_prec": {
+  "default": "medium",
+  "type": "typing.Literal['low', 'medium', 'high']",
+  "choices": [
+   "low",
+   "medium",
+   "high"
+  ],
+  "help": null
+ },
+ "muon_coefficient_type": {
+  "default": "quintic",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_num_ns_steps": {
+  "default": 5,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_tp_mode": {
+  "default": "blockwise",
+  "type": "typing.Literal['blockwise', 'duplicated', 'distributed']",
+  "choices": [
+   "blockwise",
+   "duplicated",
+   "distributed"
+  ],
+  "help": null
+ },
+ "muon_extra_scale_factor": {
+  "default": 1.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_scalar_optimizer": {
+  "default": "adam",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "muon_lr": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "muon_min_lr": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "output_dir": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "save_steps": {
+  "default": 500,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "no_save_optim": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "no_save_rng": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "mcore_model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "mcore_adapter": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "no_load_optim": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "no_load_rng": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "finetune": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "perform_initialization": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_cpu_initialization": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "async_save": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "save_total_limit": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "metric_for_best_model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "greater_is_better": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "use_persistent_ckpt_worker": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dist_ckpt_save_pre_mcore_014": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "dist_ckpt_optim_fully_reshardable": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "distrib_optim_fully_reshardable_mem_efficient": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "local_rank": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "use_distributed_optimizer": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_megatron_fsdp": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "strict_fsdp_dtensor_load": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "data_parallel_sharding_strategy": {
+  "default": "optim_grads_params",
+  "type": "typing.Literal['no_shard', 'optim', 'optim_grads', 'optim_grads_params']",
+  "choices": [
+   "no_shard",
+   "optim",
+   "optim_grads",
+   "optim_grads_params"
+  ],
+  "help": null
+ },
+ "tensor_model_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "pipeline_model_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "decoder_first_pipeline_num_layers": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "decoder_last_pipeline_num_layers": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "account_for_embedding_in_pipeline_split": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "account_for_loss_in_pipeline_split": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "overlap_p2p_comm": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "batch_p2p_comm": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "align_param_gather": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "sequence_parallel": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "context_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "cp_comm_type": {
+  "default": null,
+  "type": "typing.Union[typing.List[str], str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "cp_partition_mode": {
+  "default": "zigzag",
+  "type": "typing.Literal['zigzag', 'contiguous']",
+  "choices": [
+   "zigzag",
+   "contiguous"
+  ],
+  "help": null
+ },
+ "sequence_packing_scheduler": {
+  "default": null,
+  "type": "typing.Optional[typing.Literal['dp_balanced', 'default_dynamic_cp']]",
+  "choices": [
+   "dp_balanced",
+   "default_dynamic_cp"
+  ],
+  "help": null
+ },
+ "tp_comm_overlap": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "overlap_grad_reduce": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "overlap_param_gather": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "overlap_param_gather_with_optimizer_step": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "align_grad_reduce": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "nccl_comm_warmup": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "virtual_pipeline_model_parallel_size": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "microbatch_group_size_per_vp_stage": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "pipeline_model_parallel_layout": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "expert_model_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "expert_tensor_parallel_size": {
+  "default": 1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "report_to": {
+  "default": [
+   "tensorboard"
+  ],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "logging_steps": {
+  "default": 5,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "tensorboard_dir": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "tensorboard_queue_size": {
+  "default": 50,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "wandb_project": {
+  "default": "megatron-swift",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "wandb_exp_name": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "swanlab_project": {
+  "default": "megatron-swift",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "swanlab_exp_name": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "eval_iters": {
+  "default": -1,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "eval_steps": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "fp8_format": {
+  "default": null,
+  "type": "typing.Literal['e4m3', 'hybrid']",
+  "choices": [
+   "e4m3",
+   "hybrid"
+  ],
+  "help": null
+ },
+ "fp8_recipe": {
+  "default": "delayed",
+  "type": "typing.Literal['tensorwise', 'delayed', 'mxfp8', 'blockwise']",
+  "choices": [
+   "tensorwise",
+   "delayed",
+   "mxfp8",
+   "blockwise"
+  ],
+  "help": null
+ },
+ "fp8_param_gather": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "fp8_amax_history_len": {
+  "default": 1024,
+  "type": "<class 'int'>",
+  "choices": null,
+  "help": null
+ },
+ "fp8_amax_compute_algo": {
+  "default": "max",
+  "type": "typing.Literal['most_recent', 'max']",
+  "choices": [
+   "most_recent",
+   "max"
+  ],
+  "help": null
+ },
+ "fp4_format": {
+  "default": null,
+  "type": "typing.Literal['e2m1']",
+  "choices": [
+   "e2m1"
+  ],
+  "help": null
+ },
+ "fp4_recipe": {
+  "default": "nvfp4",
+  "type": "typing.Literal['nvfp4']",
+  "choices": [
+   "nvfp4"
+  ],
+  "help": null
+ },
+ "fp4_param_gather": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "fp16": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "bf16": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "apply_query_key_layer_scaling": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "attention_softmax_in_fp32": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "accumulate_allreduce_grads_in_fp32": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_router_load_balancing_type": {
+  "default": null,
+  "type": "typing.Optional[typing.List[str]]",
+  "choices": null,
+  "help": null
+ },
+ "moe_router_dtype": {
+  "default": "fp32",
+  "type": "typing.Literal['none', 'fp32', 'fp64']",
+  "choices": [
+   "none",
+   "fp32",
+   "fp64"
+  ],
+  "help": null
+ },
+ "moe_token_dispatcher_type": {
+  "default": "alltoall",
+  "type": "typing.Literal['allgather', 'alltoall', 'flex']",
+  "choices": [
+   "allgather",
+   "alltoall",
+   "flex"
+  ],
+  "help": null
+ },
+ "moe_enable_deepep": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_grouped_gemm": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_permute_fusion": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_aux_loss_coeff": {
+  "default": 0.0,
+  "type": "typing.List[float]",
+  "choices": null,
+  "help": null
+ },
+ "moe_z_loss_coeff": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "moe_shared_expert_overlap": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_layer_recompute": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_expert_capacity_factor": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "moe_pad_expert_input_to_capacity": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "moe_token_drop_policy": {
+  "default": "probs",
+  "type": "typing.Literal['probs', 'position']",
+  "choices": [
+   "probs",
+   "position"
+  ],
+  "help": null
+ },
+ "mtp_num_layers": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "mtp_loss_scaling_factor": {
+  "default": 0.1,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "mtp_decoder_input_detach": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "mtp_shared_weights": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "bridge_backend": {
+  "default": "mcore-bridge",
+  "type": "typing.Literal['mcore-bridge', 'megatron-bridge']",
+  "choices": [
+   "mcore-bridge",
+   "megatron-bridge"
+  ],
+  "help": null
+ },
+ "save_safetensors": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "save_missing_weights": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "ref_model": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "ref_adapters": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "merge_lora": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "max_shard_size": {
+  "default": "5GB",
+  "type": "<class 'str'>",
+  "choices": null,
+  "help": null
+ },
+ "vit_gradient_checkpointing": {
+  "default": null,
+  "type": "typing.Optional[bool]",
+  "choices": null,
+  "help": null
+ },
+ "vit_gradient_checkpointing_kwargs": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "vit_attn_impl": {
+  "default": null,
+  "type": "typing.Optional[str]",
+  "choices": null,
+  "help": null
+ },
+ "vit_lr": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "aligner_lr": {
+  "default": null,
+  "type": "typing.Optional[float]",
+  "choices": null,
+  "help": null
+ },
+ "dsa_indexer_loss_coeff": {
+  "default": 0.0,
+  "type": "<class 'float'>",
+  "choices": null,
+  "help": null
+ },
+ "dsa_indexer_use_sparse_loss": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "apply_dsa_kernel_fusion": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "csa_dense_mode": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "use_fused_mhc": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "mhc_recompute_layer_num": {
+  "default": null,
+  "type": "typing.Optional[int]",
+  "choices": null,
+  "help": null
+ },
+ "megatron_extra_kwargs": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "language_model_only": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "check_model": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "apply_wd_to_qk_layernorm": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "linear_decoupled_in_proj": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "enable_dft_loss": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "enable_channel_loss": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "mrl_dims": {
+  "default": null,
+  "type": "typing.Union[dict, str, NoneType]",
+  "choices": null,
+  "help": null
+ },
+ "save_strategy": {
+  "default": "steps",
+  "type": "typing.Literal['steps', 'epoch']",
+  "choices": [
+   "steps",
+   "epoch"
+  ],
+  "help": null
+ },
+ "callbacks": {
+  "default": [],
+  "type": "typing.List[str]",
+  "choices": null,
+  "help": null
+ },
+ "skip_megatron_init": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "add_version": {
+  "default": true,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ },
+ "create_checkpoint_symlink": {
+  "default": false,
+  "type": "<class 'bool'>",
+  "choices": null,
+  "help": null
+ }
+}

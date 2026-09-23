@@ -1,0 +1,24 @@
+{
+  "dataset": "/kwkj-k8s/llm_team/lys/megatron-swift/multinode/smoke_data/pp_split_ab/real_step5_repeated_40rows.jsonl",
+  "dataset_sha256": "839132c0472ff44a480d7f6f00a577b970739fcdcbb33e0ee33893de3861750f",
+  "summary": "/kwkj-k8s/llm_team/lys/megatron-swift/multinode/smoke_data/pp_split_ab/real_step5_repeated_40rows.jsonl.summary.json",
+  "rows": 40,
+  "tokens_per_step": 827160,
+  "configs": [
+    {
+      "split": 22,
+      "config": "/kwkj-k8s/llm_team/lys/megatron-swift/multinode/tb226_flash_next_lora_4node_qsa_ppsplit22_smoke.yaml",
+      "sha256": "078fc5d0aa21b16e4c123f01b8cf86bce77f97a72cde5e38e5775bc8d20433c1"
+    },
+    {
+      "split": 23,
+      "config": "/kwkj-k8s/llm_team/lys/megatron-swift/multinode/tb226_flash_next_lora_4node_qsa_ppsplit23_smoke.yaml",
+      "sha256": "28e400c35e34d695b502b5ab01aadfeaa0f1fb8baa97c9368d71a70a7018ae52"
+    },
+    {
+      "split": 24,
+      "config": "/kwkj-k8s/llm_team/lys/megatron-swift/multinode/tb226_flash_next_lora_4node_qsa_ppsplit24_smoke.yaml",
+      "sha256": "eb8d37298683e6050a0fffa6d41cf39d1fd3ee7125c4d44d88ee50e10e5fe734"
+    }
+  ]
+}

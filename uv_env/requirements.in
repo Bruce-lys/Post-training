@@ -1,0 +1,27 @@
+# Top-level requirements for lys/megatron-swift uv env (mirrors cainn/megatron-swift/.venv-swift, 2026-09-07).
+# Exact versions of everything else are pinned by constraints.txt (pip freeze of the cainn env).
+torch==2.9.1+cu128
+torchvision==0.24.1+cu128
+# triton: torch 2.9.1 pins 3.5.1 but the cainn env runs 3.8.0 -> overridden in overrides.txt
+ms-swift[megatron] @ git+https://github.com/modelscope/ms-swift.git@2884c7fc8968aaa8a739e429ed237b3fcef07ffb
+mcore-bridge @ git+https://github.com/modelscope/mcore-bridge.git@4f2a95c9548bcd588b6f7763074debcdbf6b2d69
+transformers==5.16.1
+megatron-core==0.19.0
+# TransformerEngine: core + cu12 lib are PyPI wheels; the torch binding (transformer_engine_torch) is
+# NOT installed here - it is copied prebuilt from the cainn env by build_uv_env.sh (no compile).
+transformer-engine==2.14.1
+transformer-engine-cu12==2.14.1
+nvidia-cudnn-frontend==1.28.0
+onnx
+onnxscript
+nvdlfw-inspect
+# GDN / linear attention
+fla-core==0.5.2
+flash-linear-attention==0.5.2
+# flash_attn_3 runtime deps (flash_attn_3 itself is copied prebuilt from cainn)
+einops
+ninja
+packaging
+# qwen4_exp multimodal
+qwen-vl-utils==0.0.14
+decord==0.6.0

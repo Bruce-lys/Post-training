@@ -1,0 +1,7 @@
+# ms-swift declares transformers<5.17 and mcore-bridge declares <5.15, but qwen4_exp needs >=5.16.
+# The cainn env force-installed 5.16.1; we reproduce that with an override.
+transformers==5.16.1
+# torch==2.9.1 declares triton==3.5.1; the cainn env (verified working) has 3.8.0.
+triton==3.8.0
+# datasets 4.8.4 declares fsspec<=2026.2.0; the cainn env runs 2026.7.0.
+fsspec==2026.7.0

@@ -1,0 +1,18 @@
+# pyextra/ 目录中 vendored 的第三方包（该目录已被 .gitignore 排除）
+# 生成时间: 2026-09-23 15:54:25  节点: hd03-gpu2-0019
+nvidia-ml-py==13.610.43
+orjson==3.12.0
+platformdirs==4.11.8
+prettytable==3.18.0
+pwinput==1.0.3
+pydantic-settings==2.15.0
+pyecharts==2.1.0
+pyroaring==1.1.0
+python-dotenv==1.2.3
+swanlab==0.10.0
+watchdog==6.0.0
+wcwidth==0.8.3
+wrapt==2.4.1
+# (裸模块，无 dist-info): example.py
+# (裸模块，无 dist-info): pynvml.py
+# (裸模块，无 dist-info): pyroaring.cpython-312-x86_64-linux-gnu.so

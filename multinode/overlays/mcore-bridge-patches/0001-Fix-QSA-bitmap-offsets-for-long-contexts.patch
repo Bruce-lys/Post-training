@@ -1,0 +1,43 @@
+From 1f2bda0a30927c5270e20046ba86498af2499541 Mon Sep 17 00:00:00 2001
+From: Codex <codex@local>
+Date: Wed, 16 Sep 2026 11:25:27 +0800
+Subject: [PATCH 1/2] Fix QSA bitmap offsets for long contexts
+
+---
+ .../model/modules/kernels/qsa_block_sparse_attn.py          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py b/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
+index f0b8586..f7d23a0 100644
+--- a/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
++++ b/src/mcore_bridge/model/modules/kernels/qsa_block_sparse_attn.py
+@@ -116,7 +116,7 @@ def _qsa_bs_fwd_kernel(
+         # group-granular lookup would assign some tokens to the wrong block.
+         blk = blk_base[:, None] + (offs_k[None, :] - tok_base[:, None]) // BLK
+         sel = tl.load(
+-            SEL + offs_q[:, None] * stride_st + blk,
++            SEL + offs_q.to(tl.int64)[:, None] * stride_st + blk,
+             mask=q_mask[:, None] & k_in[None, :] & (blk >= 0) & (blk < NB),
+             other=0,
+         )
+@@ -228,7 +228,7 @@ def _qsa_bs_dq_kernel(
+         # group-granular lookup would assign some tokens to the wrong block.
+         blk = blk_base[:, None] + (offs_k[None, :] - tok_base[:, None]) // BLK
+         sel = tl.load(
+-            SEL + offs_q[:, None] * stride_st + blk,
++            SEL + offs_q.to(tl.int64)[:, None] * stride_st + blk,
+             mask=q_mask[:, None] & k_in[None, :] & (blk >= 0) & (blk < NB),
+             other=0,
+         )
+@@ -324,7 +324,7 @@ def _qsa_bs_dkdv_kernel(
+ 
+         blk = blk_base[:, None] + (offs_k[None, :] - tok_base[:, None]) // BLK
+         sel = tl.load(
+-            SEL + offs_q[:, None] * stride_st + blk,
++            SEL + offs_q.to(tl.int64)[:, None] * stride_st + blk,
+             mask=q_mask[:, None] & k_in[None, :] & (blk >= 0) & (blk < NB),
+             other=0,
+         )
+-- 
+2.34.1
+
